@@ -13,7 +13,23 @@
     <main>
       <section id="signin">
         <h2>Formulario de acceso</h2>
+        <form action="signin.php" method="post">
+          <div>
+            <label for="email">Email: </label>
+            <input type="text" name="email" id="email" />
+          </div>
+          <div>
+            <label for="password">Contraseña </label>
+            <input type="text" name="password" id="password" />
+          </div>
+          <div>
+            <button type="submit">Acceder</button>
+            <button type="reset">Borrar</button>
+            <button type="button" onclick="mostrarFormularioAlta()">Nuevo usuario</button>
+          </div>
+        </form>
       </section>
+
       <section id="signup">
         <h2>Por favor, introduzca sus datos</h2>
         <form action="signup.php" method="post">
@@ -69,7 +85,7 @@
           <div>
             <button type="submit">Enviar datos</button>
             <button type="reset">Borrar datos</button>
-            <button type="button">Cancelar</button>
+            <button type="button" onclick="volverInicio()">Cancelar</button>
           </div>
         </form>
       </section>
