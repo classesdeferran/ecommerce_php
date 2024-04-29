@@ -49,7 +49,7 @@ $result = $query->fetch();
 // echo $result['id_ciudad'];
 // echo "</pre>";
 
-$id_ciudad = $result['id_ciudad'];
+
 
 if (!$result) {
     // Insertar la ciudad
@@ -66,10 +66,17 @@ if (!$result) {
     // echo "<pre>";
     // echo $result['id_ciudad'];
     // echo "</pre>";
-
-    $id_ciudad = $result['id_ciudad'];
 }
+
+$id_ciudad = $result['id_ciudad'];
 
 $insert = "INSERT INTO clientes (nombre_cliente, apellidos_cliente, password, email, nif, telefono, direccion_cliente, id_ciudad) VALUES (?,?,?,?,?,?,?,?)";
 $query = $conn->prepare($insert);
 $query->execute([$nombre, $apellidos, $password1, $email, $nif, $telefono, $direccion, $id_ciudad]);
+
+
+$conn = null;
+$insert = null;
+$select = null;
+
+header('Location: ecommerce.php');
