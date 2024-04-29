@@ -11,16 +11,16 @@ $link = "mysql:host=$adress;port=3306;dbname=$database";
 
 try {
 
-    $pdo = new PDO($link, $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $pdo->exec("SET CHARACTER SET utf8");
-    $pdo->exec("SET NAMES utf8");
-    $pdo->exec("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
-    $pdo->exec("SET CHARACTER_SET_CLIENT = 'utf8'");
-    $pdo->exec("SET CHARACTER_SET_RESULTS = 'utf8'");
-    $pdo->exec("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
+    $conn = new PDO($link, $user, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $conn->exec("SET CHARACTER SET utf8");
+    $conn->exec("SET NAMES utf8");
+    $conn->exec("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
+    $conn->exec("SET CHARACTER_SET_CLIENT = 'utf8'");
+    $conn->exec("SET CHARACTER_SET_RESULTS = 'utf8'");
+    $conn->exec("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
 
     echo "Conexión realizada <br>";
 
