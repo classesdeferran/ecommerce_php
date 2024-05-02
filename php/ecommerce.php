@@ -4,11 +4,11 @@ require_once('connection.php');
 
 // var_dump($_SESSION);
 
-if (!isset($_SESSION['nombre_cliente'])) {
-    header('Location: ../index.php');
-}
+// if (!isset($_SESSION['email'])) {
+//     header('Location: ../index.php');
+// }
 
-echo "Hola ".$_SESSION['nombre_cliente']." ".$_SESSION['apellidos_cliente'];
+echo "Hola ".$_SESSION['nombre']." ".$_SESSION['apellidos'];
 
 ?>
 
