@@ -38,14 +38,15 @@
             <legend>Datos personales</legend>
             <div>
               <label for="nombre">Nombre:</label>
-              <input type="text" name="nombre" id="nombre" />
-              <div id="errorNombre"></div>
+              <input type="text" name="nombre" id="nombre" />              
             </div>
+            <div id="error-nombre" class="errorValidacion"></div>
 
             <div> 
               <label for="apellidos">Apellidos:</label>
               <input type="text" name="apellidos" id="apellidos"  />
             </div>
+            <div id="error-apellidos" class="errorValidacion"></div>
 
             <div>
               <label for="password1">Contraseña elegida:</label>

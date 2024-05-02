@@ -37,22 +37,41 @@ signupForm.addEventListener("submit", (e) => {
 
   // Obtener cada valor
   let nombre = formData.get("nombre").trim();
+  let apellidos = formData.get("apellidos").trim();
+  let password = formData.get("password1");
+
   // Pattern nombre
   const patternNombre = /^[a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ\s]+$/;
-  if (!patternNombre.test(nombre)) {
-    document.getElementById("errorNombre").style.display = "block"
-    document.getElementById("errorNombre").innerHTML =
-      "<p>Nombre no válido</p>";
+  if (!validarNombre(nombre, patternNombre, "nombre")) {
+    return;
+  }
+  if (!validarNombre(apellidos, patternNombre, "apellidos")) {
     return;
   }
 
+
+  // if (!patternNombre.test(nombre)) {
+  //   document.getElementById("error-nombre").style.display = "block"
+  //   document.getElementById("error-nombre").innerHTML =
+  //     "<p>Nombre no válido</p>";
+  //   return;
+  // }
+  // let apellidos= formData.get("apellidos").trim();
+  // if (!patternNombre.test(apellidos)) {
+  //   document.getElementById("errorNombre").style.display = "block"
+  //   document.getElementById("errorNombre").innerHTML =
+  //     "<p>Nombre no válido</p>";
+  //   return;
+  // }
   // console.log(nombre);
 
   // Generar el objeto con los datos
   const data = {
     nombre,
+    apellidos,
+
   };
-  let data2 = JSON.stringify(data);
+  // let data2 = JSON.stringify(data);
   // console.log(data["nombre"]);
 
   fetch("php/signup.php", {
@@ -66,7 +85,8 @@ signupForm.addEventListener("submit", (e) => {
     .then((text) => console.log(text))
     .catch((error) => console.log(error));
 
-  console.log("Linea 60");
+  // Con fetch se altera el flujo lineal del código
+  // console.log("Linea 60");
 
   // const data = {
   //   nombre,
@@ -135,3 +155,16 @@ fetch('../php/signup.php', {
 
 //   return nombreCorregido;
 // }
+
+function validarNombre(text, pattern, attribute) {
+  if (pattern.test(text)) {
+    document.getElementById("error-" + attribute).style.display = "none";
+    return true
+
+  } else {
+    document.getElementById("error-" + attribute).style.display = "block";
+    document.getElementById("error-" + attribute).innerHTML =
+      `<p>${text} no es válido</p>`;
+    return false;
+  }
+}
