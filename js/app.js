@@ -38,38 +38,49 @@ signupForm.addEventListener("submit", (e) => {
   // Obtener cada valor
   let nombre = formData.get("nombre").trim();
   let apellidos = formData.get("apellidos").trim();
-  let password = formData.get("password1");
+  let password1 = formData.get("password1").trim();
+  let password2 = formData.get("password2").trim();
+  let nif = formData.get("nif").toUpperCase().trim();
+  let direccion = formData.get("direccion").trim();
 
   // Pattern nombre
   const patternNombre = /^[a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ\s]+$/;
-  if (!validarNombre(nombre, patternNombre, "nombre")) {
+  if (!validarItems(nombre, patternNombre, "nombre")) {
     return;
   }
-  if (!validarNombre(apellidos, patternNombre, "apellidos")) {
+  if (!validarItems(apellidos, patternNombre, "apellidos")) {
+    return;
+  }
+  if (password1 !== password2) {
+    document.getElementById("errorPassword").innerHTML =
+      "<p>Las contraseñas no coinciden</p>";
+    document.getElementById("password2").value = "";
     return;
   }
 
 
-  // if (!patternNombre.test(nombre)) {
-  //   document.getElementById("error-nombre").style.display = "block"
-  //   document.getElementById("error-nombre").innerHTML =
-  //     "<p>Nombre no válido</p>";
-  //   return;
-  // }
-  // let apellidos= formData.get("apellidos").trim();
-  // if (!patternNombre.test(apellidos)) {
-  //   document.getElementById("errorNombre").style.display = "block"
-  //   document.getElementById("errorNombre").innerHTML =
-  //     "<p>Nombre no válido</p>";
-  //   return;
-  // }
-  // console.log(nombre);
+  const patternNif = /[0-9A-Z][0-9]{7}[A-Z]/;
+  // if (nif.length < 9 || validarItems(nif, patternNif, "nif")) {
+    console.log(patternNif.test(nif));
+
+  if (nif.length < 9 || !patternNif.test(nif)) {
+    document.getElementById("error-nif").style.display = "block";
+    document.getElementById("error-nif").innerHTML = "<p>NIF incorrecto</p>";
+    return;
+  } else {
+    document.getElementById("error-nif").style.display = "none";
+  }
+
+  const patternDireccion = /^[a-zA-ZáéíóúàèìòùüñÑçÇÁÉÍÓÚÀÈÌÒÙÜ0-9\s]+$/;
+  if (!validarItems(direccion, patternNombre, "direccion")) {
+    return;
+  }
 
   // Generar el objeto con los datos
   const data = {
     nombre,
     apellidos,
-
+    nif,
   };
   // let data2 = JSON.stringify(data);
   // console.log(data["nombre"]);
@@ -113,12 +124,7 @@ signupForm.addEventListener("submit", (e) => {
   let telefono = document.getElementById("telefono").value.trim();
   
 
-  if (password1 !== password2) {
-    document.getElementById("errorPassword").innerHTML =
-      "<p>Las contraseñas no coinciden</p>";
-    document.getElementById("password2").value = "";
-    return;
-  } 
+
   
   // Objeto tipo JSON
 let datos = {
@@ -156,15 +162,16 @@ fetch('../php/signup.php', {
 //   return nombreCorregido;
 // }
 
-function validarNombre(text, pattern, attribute) {
+function validarItems(text, pattern, attribute) {
   if (pattern.test(text)) {
     document.getElementById("error-" + attribute).style.display = "none";
-    return true
-
+    return true;
   } else {
+    console.log(attribute + " is not a valid");
     document.getElementById("error-" + attribute).style.display = "block";
-    document.getElementById("error-" + attribute).innerHTML =
-      `<p>${text} no es válido</p>`;
+    document.getElementById(
+      "error-" + attribute
+    ).innerHTML = `<p>${text} no es válido</p>`;
     return false;
   }
 }
