@@ -5,3 +5,11 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#errorNombre {
+    display: none;
+    color: red;
+    border: 2px solid red;
+    background-color: rgb(255, 0, 0, 20%);
+    padding: 5px;
+    margin: 5px 0;
+}
